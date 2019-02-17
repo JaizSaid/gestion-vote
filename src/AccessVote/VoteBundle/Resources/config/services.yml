@@ -1,0 +1,4 @@
+services:
+#    access_vote_vote.example:
+#        class: AccessVote\VoteBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

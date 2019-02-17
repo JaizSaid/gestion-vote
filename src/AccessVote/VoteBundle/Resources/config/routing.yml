@@ -1,0 +1,26 @@
+ajoutcontrat:
+    path:     /AjoutQuestion
+    defaults: { _controller: AccessVoteVoteBundle:Questions:ajout }
+
+
+listecontrat:
+    path:     /
+    defaults: { _controller: AccessVoteVoteBundle:Questions:List }
+
+listpros:
+    path:     /List
+    defaults: { _controller: AccessVoteVoteBundle:Propositions:List }
+
+
+supprimercontrat:
+    path:     /SupprimerQuestion/{id}
+    defaults: { _controller: AccessVoteVoteBundle:Questions:supprimers }
+
+
+ajoutpropos:
+    path:     /AjoutProposition
+    defaults: { _controller: AccessVoteVoteBundle:Propositions:ajout }
+
+supprimepros:
+    path:     /SupprimerProposition/{id}
+    defaults: { _controller: AccessVoteVoteBundle:Questions:supprimers }

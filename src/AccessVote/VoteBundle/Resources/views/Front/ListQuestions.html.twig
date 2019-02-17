@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>La liste des questions</title>
+</head>
+<body>
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>Gestion de Vote</h1>
+        <p>Access</p>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(".search").keyup(function () {
+            var searchTerm = $(".search").val();
+            var listItem = $('.results tbody').children('tr');
+            var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+            $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+                    return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                }
+            });
+
+            $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+                $(this).attr('visible','false');
+            });
+
+            $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+                $(this).attr('visible','true');
+            });
+
+            var jobCount = $('.results tbody tr[visible="true"]').length;
+            $('.counter').text(jobCount + ' item');
+
+            if(jobCount == '0') {$('.no-result').show();}
+            else {$('.no-result').hide();}
+        });
+    });
+</script>
+
+<br><br><br><br><br>
+<div class="container">
+<div class="table-responsive">
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Question</th>
+        <th>Action</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {%  for modele in modeles %}
+    <tr>
+        <td>{{ modele.id }}</td>
+        <td>{{ modele.question }}</td>
+        <td><a href="{{ path('supprimercontrat',{'id': modele.id }) }}" type="button" class="btn btn-danger">Supprimer</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    <center><a href="http://localhost/AccessVote/web/app_dev.php/AjoutQuestion" class='btn btn btn-success' style="color: black ;">Ajout Question</a></center>
+</div>
+</div>
+
+<br><br><br><br>
+
+
+
+</body>
+</html>
